@@ -1,0 +1,146 @@
+{
+  "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/mattijn/dataset_hoogwater23/main/series_tov_hoog.json"
+      },
+      "mark": {"type": "line", "clip": true},
+      "encoding": {
+        "x": {
+          "axis": {
+            "values": [
+              878.5,
+              890.5,
+              903,
+              929.3,
+              945,
+              957,
+              965,
+              980.8,
+              994.5,
+              1001
+            ],
+            "title": "rivier kilometer"
+          },
+          "field": "afstand",
+          "scale": {"domain": [878.5, 1001]},
+          "type": "quantitative"
+        },
+        "y": {
+          "axis": {"title": "waterstand t.o.v. hoog"},
+          "field": "waterstand_tov_hoog",
+          "scale": {"domain": [-1, 0.2]},
+          "type": "quantitative"
+        }
+      },
+      "name": "view_81",
+      "transform": [
+        {
+          "filter": "(year(datum.timeStamp) == year(slider.timeStamp[0])) && (month(datum.timeStamp) == month(slider.timeStamp[0])) && (date(datum.timeStamp) == date(slider.timeStamp[0])) && (hours(datum.timeStamp) == hours(slider.timeStamp[0])) && (minutes(datum.timeStamp) == minutes(slider.timeStamp[0]))"
+        }
+      ]
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/mattijn/dataset_hoogwater23/main/series_tov_hoog.json"
+      },
+      "mark": {
+        "type": "point",
+        "clip": true,
+        "filled": true,
+        "opacity": 1,
+        "size": 100,
+        "tooltip": true
+      },
+      "encoding": {
+        "color": {
+          "field": "locatie",
+          "scale": {
+            "domain": [
+              "IJsselkop",
+              "De Steeg",
+              "Doesburg brug",
+              "Zutpen noord",
+              "Deventer",
+              "Olst",
+              "Wijhe",
+              "Katerveer",
+              "Kampen",
+              "Keteldiep"
+            ],
+            "range": [
+              "#332288",
+              "#88CCEE",
+              "#44AA99",
+              "#117733",
+              "#999933",
+              "#DDCC77",
+              "#CC6677",
+              "#882255",
+              "#AA4499",
+              "#DDDDDD"
+            ]
+          },
+          "type": "nominal"
+        },
+        "x": {
+          "axis": {
+            "values": [
+              878.5,
+              890.5,
+              903,
+              929.3,
+              945,
+              957,
+              965,
+              980.8,
+              994.5,
+              1001
+            ],
+            "title": "rivier kilometer"
+          },
+          "field": "afstand",
+          "type": "quantitative"
+        },
+        "y": {
+          "axis": {"title": "waterstand t.o.v. hoog"},
+          "field": "waterstand_tov_hoog",
+          "scale": {"domain": [-1, 0.2]},
+          "type": "quantitative"
+        }
+      },
+      "transform": [
+        {
+          "filter": "(year(datum.timeStamp) == year(slider.timeStamp[0])) && (month(datum.timeStamp) == month(slider.timeStamp[0])) && (date(datum.timeStamp) == date(slider.timeStamp[0])) && (hours(datum.timeStamp) == hours(slider.timeStamp[0])) && (minutes(datum.timeStamp) == minutes(slider.timeStamp[0]))"
+        }
+      ]
+    },
+    {
+      "data": {"name": "empty"},
+      "mark": {"type": "rule"},
+      "encoding": {"y": {"datum": 0}}
+    }
+  ],
+  "params": [
+    {
+      "name": "slider",
+      "select": {"type": "point", "fields": ["timeStamp"]},
+      "bind": {
+        "input": "range",
+        "max": 1703701800000,
+        "min": 1703257200000,
+        "step": 600000
+      },
+      "value": [{"timeStamp": 1703257200000}],
+      "views": ["view_81"]
+    }
+  ],
+  "title": {
+    "text": {
+      "expr": "\"situatie op \"+date(slider[\"timeStamp\"][0])+\" december \"+hours(slider[\"timeStamp\"][0])+\":\"+minutes(slider[\"timeStamp\"][0])"
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json",
+  "datasets": {"empty": [{}]}
+}
